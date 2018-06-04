@@ -1,5 +1,6 @@
 # encoding=utf-8
 
+import util
 def get_data(net, name):
     import caffe
     if isinstance(net, caffe._caffe.Solver):
@@ -17,9 +18,6 @@ def get_params(net, name = None):
     return p
     
 def draw_log(log_path, output_names, show = False, save_path = None, from_to = None, smooth = False):
-    import util
-
-
     pattern = "Train net output: word_bbox_loc_loss = "
     log_path = util.io.get_absolute_path(log_path)
     f = open(log_path,'r')
@@ -28,7 +26,7 @@ def draw_log(log_path, output_names, show = False, save_path = None, from_to = N
     plt = util.plt.plt
     for line in f.readlines():
         if util.str.contains(line, 'Iteration') and util.str.contains(line, 'loss = '):
-            util.log.info(line)
+            print(line)
             s = line.split('Iteration')[-1]
             iter_num = util.str.find_all(s, '\d+')[0]
             iter_num = int(iter_num)
@@ -45,8 +43,8 @@ def draw_log(log_path, output_names, show = False, save_path = None, from_to = N
                 if util.str.contains(line, ptr):
                     if name not in outputs:
                         outputs[name] = []
-                    util.log.info(line)
-                    print( '\t', iter_num, name, output)
+                    print(line)
+                    print('\t', iter_num, name, output)
                     outputs[name].append(output)
     if len(outputs)==0:
         print('No output named:', output_names)

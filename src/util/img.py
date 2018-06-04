@@ -2,15 +2,14 @@
 '''
 @author: dengdan
 '''
-from __future__ import absolute_import
-
-from . import log
 try:
     import cv2
 except:
-    log.info('cv2 is unavailable, util.img can not be used.')
+    print('cv2 is unavailable, util.img can not be used.')
 import numpy as np
+import logging
 import math
+import event
 import util
 
 IMREAD_GRAY = 0
@@ -525,7 +524,7 @@ def min_area_rect(xs, ys):
         
     num_rects = xs.shape[0]
     box = np.empty((num_rects, 5))#cx, cy, w, h, theta
-    for idx in xrange(num_rects):
+    for idx in range(num_rects):
         points = zip(xs[idx, :], ys[idx, :])
         cnt = points_to_contour(points)
         rect = cv2.minAreaRect(cnt)

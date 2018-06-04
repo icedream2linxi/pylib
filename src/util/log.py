@@ -1,4 +1,9 @@
-#encoding=utf-8
+#coding=utf-8
+'''
+Created on 2016年10月12日
+
+@author: dengdan
+'''
 import datetime
 import logging
 
@@ -41,6 +46,3 @@ def init_logger(log_file = None, log_path = None, log_level = logging.DEBUG, mod
 #     console.setFormatter(formatter)
 #     logging.getLogger('').addHandler(console)
 
-
-def info(msg):
-    logging.info(msg)

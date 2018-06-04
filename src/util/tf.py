@@ -43,7 +43,7 @@ def get_available_gpus(num_gpus = None):
         local_device_protos = _device_lib.list_local_devices()
         return [x.name for x in local_device_protos if x.device_type == 'GPU']
     else:
-        return ['/gpu:%d'%(idx) for idx in xrange(num_gpus)]
+        return ['/gpu:%d'%(idx) for idx in range(num_gpus)]
 
 def get_latest_ckpt(path):
 # tf.train.latest_checkpoint
@@ -56,7 +56,7 @@ def get_latest_ckpt(path):
         else:
             ckpt_path = None
     else:
-        ckpt_path = path;
+        ckpt_path = path
     return ckpt_path
 
 def get_all_ckpts(path):
@@ -279,10 +279,3 @@ def do_nothing(*args):
     def _do_nothing():
         return args
     return _do_nothing
-
-def prob_do(probability, fn, args):
-    p = prob()
-    def do():
-        return fn(*args)
-    
-    return tf.cond(p < probability, do, do_nothing(*args))

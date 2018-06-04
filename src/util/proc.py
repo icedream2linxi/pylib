@@ -15,9 +15,8 @@ def set_proc_name(name):
     try:
         import setproctitle
     except:
-        import util
-        util.log.info('Module setproctitle is not installed. Run:')
-        util.log.info('\t: pip install setproctitle --user')
+        print('Module setproctitle is not installed. Run:')
+        print('\t: pip install setproctitle --user')
     setproctitle.setproctitle(name)
     
 def kill(pid):
@@ -27,7 +26,7 @@ def kill(pid):
             kill(p)
     elif type(pid) == int:
         cmd = 'kill -9 %d'%(pid)
-        util.log.info(cmd)
+        print(cmd)
         print(util.cmd.cmd(cmd))
     elif type(pid) == str:
         pids = get_pid(pid)
@@ -45,7 +44,7 @@ def get_pid(pattern):
     import util
     cmd = 'ps aux|grep %s'%(pattern)
     results = util.cmd.cmd(cmd)
-    results = util.str.split(str(results), '\n')
+    results = util.str.split(results, '\n')
     pids = []
     for result in results:
         info = result.split()
